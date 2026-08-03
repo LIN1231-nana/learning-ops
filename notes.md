@@ -363,12 +363,133 @@ sh, bash, $, []
 ---
 
 ## Problems & Solutions
-How to view the members of a group？
+How to view the members of a group?
 
 - **Answer**: 
   Can't view all members at once, but can query which group the user belongs to.
   `groups username`
 
 ---
+
+
+
+
+# Ops Learning Journal - [2026-07-27]
+
+## Today's Focus
+> `if` condition judgment and `while` loop
+
+---
+
+## New Commands Learned
+if, case, while
+
+---
+
+## Errors & Solutions
+
+
+- **Error Message**: `-bash: ./while.sh: /bon/bash: 坏的解释器: 没有那个文件或目录` when I run `./while.sh`.
+- **Why**: 
+  The first line is incorrect.
+- **How I fixed**: 
+  Correct `#!/bon/bash` to `#!/bin/bash`
+
+---
+
+
+
+
+# Ops Learning Journal - [2026-07-28]
+
+## Today's Focus
+> Regular expressions and the system functions, custom functions and some tools of the Shell.
+
+---
+
+## New Commands Learned
+basename, dirname, cut, awk, sort, wc.
+
+### 1. Command: `awk`
+- **Usage**: Read the file line by line and then analyze and process it.
+- **Example**: `awk -F ":" '/mysql/{print $1}' passwd`
+- **My Note**: `BEGIN{print "xxx"}` Execute before reading all the data, `END{print "xxx"}` Execute after reading all the data.
+
+### 2. Command: `wc`
+- **Usage**: Word count.
+- **Option**: `-l` count the number of lines in the file.
+- **Option**: `-w` count the number of words in the file.
+- **Option**: `-m` count the number of characters in the file.
+- **Option**: `-c` count the number of bytes in the file.
+- **Example**: `wc -l passwd`
+
+---
+
+## Errors & Solutions
+
+- **Error Message**: 
+  `./func.sh:行14: func: 未找到命令` when I run `./func.sh`.
+- **Why**: 
+  When using custom functions in the shell, you should declare first and then call. The function name is not `func`.
+- **How I fixed**: 
+  Correct `func $X $Y` to `SUM $X $Y`
+
+---
+
+## One Key Takeaway
+> Regular expressions are used to search for and replace text that matches a certain pattern.
+
+---
+
+
+
+
+# Ops Learning Journal - [2026-07-29]
+
+## Today's Focus
+> the basic knowledge of AliyunECS, the installation and use of the Ubuntu system.
+
+---
+
+## New Learned
+
+### 1. How to initiate a remote connection
+- `sudo apt install openssh-server`
+- `sudo service ssh start`
+- `sudo vim /etc/ssh/sshd_config`
+    Replace `#PermitRootLogin prohibit-passwd` with `PermitRootLogin yes`
+
+---
+
+## One Key Takeaway
+> Some basic functions of Ubuntu require installation.
+
+---
+
+
+
+
+
+# Ops Learning Journal - [2026-07-31]
+
+## Today's Focus
+> Create a new user named `devops` and grant it sudo privileges; use `Vim` to edit `/etc/hosts` and add a record; start the background process by executing `sleep 1000 &`, then use `ps` to find the PID and use `kill` to terminate it.
+
+---
+
+## Problems & Solutions
+
+### 1. How to start the background process: sleep 1000 &
+- **Answer**: 
+  `sleep 1000 &`
+
+### 2. Can't find `sleep 1000 &`
+- **Error Message**: `ps -ef | grep "sleep 1000 &" | grep -v grep`.
+- **Why**: Using `&` as part of `grep`, but `&` has a special meaning in the shell (indicating background execution), so it was interpreted by the shell.
+- **How I fixed**: `ps -ef | grep sleep | grep -v grep`
+
+---
+
+
 
 
